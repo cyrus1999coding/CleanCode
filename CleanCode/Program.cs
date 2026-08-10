@@ -1,4 +1,6 @@
-﻿namespace CleanCode
+﻿using System.Runtime.CompilerServices;
+
+namespace CleanCode
 {
     internal class Program
     {
@@ -10,20 +12,8 @@
 
         class OrderProcessor
         {
-            public void ProcessOrder()
-            { 
-            
-            }
-
-            public void PrintOrder()
-            {
-
-            }
-
-            public void DeleteOrder()
-            {
-
-            }
+            private bool hasError = false;
+            private bool isValid = true;
         }
 
     }
