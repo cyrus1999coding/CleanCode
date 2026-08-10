@@ -4,7 +4,8 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+           int studentCount = 100;
+           string studentName = "John";
         }
     }
 }
