@@ -8,14 +8,21 @@
             Console.ReadKey();
         }
 
-        class CustomerService
+        class OrderProcessor
         {
-            private string customerName = "JohnDoe";
-            //private string _customerName = "JohnDoe";
+            public void ProcessOrder()
+            { 
+            
+            }
 
-            public CustomerService(string customerName)
+            public void PrintOrder()
             {
-                this.customerName = customerName;
+
+            }
+
+            public void DeleteOrder()
+            {
+
             }
         }
 
