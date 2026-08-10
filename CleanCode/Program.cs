@@ -2,65 +2,57 @@
 
 namespace CleanCode
 {
-    public enum CustomerType
-    {
-        Regular,
-        Premium,
-        Employee
-    }
-
     internal class Program
     {
         static void Main(string[] args)
         {
-            double regularCustomerDiscount =
-                DiscountCalculator.CalculateDiscount(CustomerType.Regular, 1200);
+            List<Order> orders = new List<Order>
+            {
+                new Order { Id =1, ProductName = "LapTop", Quantity = 2, Price = 1500 },
+                new Order { Id =2, ProductName = "Phone", Quantity = 5, Price = 500 },
+            };
 
-            Console.WriteLine($"Regular Customer Discount : {regularCustomerDiscount}");
-
-            double premiumCustomerDiscount =
-                DiscountCalculator.CalculateDiscount(CustomerType.Premium, 800);
-
-            Console.WriteLine($"Premium Customer Discount : {premiumCustomerDiscount}");
-
-            double employeeCustomerDiscount =
-                DiscountCalculator.CalculateDiscount(CustomerType.Employee, 1500);
-
-            Console.WriteLine($"Employee Customer Discount : {employeeCustomerDiscount}");
+            OrderPrinter printer = new OrderPrinter();
+            printer.PrintOrderDetails(orders);
 
             Console.ReadKey();
         }
     }
 
-    public class DiscountCalculator
+    public class Order
     {
-        private const int DISCOUNT_THRESHOLD = 1000;
+        public int Id { get; set; }
+        public string ProductName { get; set; }
+        public int Quantity { get; set; }
+        public double Price { get; set; }
 
-        public static double CalculateDiscount(
-            CustomerType customerType,
-            double totalAmount)
+    }
+
+    public class OrderPrinter
+    {
+        public void PrintOrderDetails(List<Order> orders)
         {
-            double discount = 0;
+            double totalPrice = 0;
 
-            switch (customerType)
+            foreach (var order in orders)
             {
-                case CustomerType.Regular:
-                    discount = totalAmount > DISCOUNT_THRESHOLD ? 0.1 : 0.05;
-                    break;
+                if (order.Quantity > 0 && order.Price > 0)
+                {
+                    double total = order.Quantity * order.Price;
+                    Console.WriteLine("Order ID: " + order.Id);
+                    Console.WriteLine("Product: " + order.ProductName);
+                    Console.WriteLine("Quantity: " + order.Quantity);
+                    Console.WriteLine("Price: " + order.Price);
+                    Console.WriteLine("Total: " + order.Price * order.Quantity);
+                    Console.WriteLine("----------------------");
 
-                case CustomerType.Premium:
-                    discount = totalAmount > DISCOUNT_THRESHOLD ? 0.15 : 0.10;
-                    break;
-
-                case CustomerType.Employee:
-                    discount = totalAmount > DISCOUNT_THRESHOLD ? 0.20 : 0.15;
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(customerType));
+                    totalPrice += order.Quantity * order.Price;
+                }
             }
 
-            return discount;
+            Console.WriteLine("Total Price: " + totalPrice);
         }
     }
+
+
 }
