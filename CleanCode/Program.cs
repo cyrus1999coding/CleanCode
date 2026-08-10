@@ -6,53 +6,35 @@ namespace CleanCode
     {
         static void Main(string[] args)
         {
-            List<Order> orders = new List<Order>
-            {
-                new Order { Id =1, ProductName = "LapTop", Quantity = 2, Price = 1500 },
-                new Order { Id =2, ProductName = "Phone", Quantity = 5, Price = 500 },
-            };
-
-            OrderPrinter printer = new OrderPrinter();
-            printer.PrintOrderDetails(orders);
+            
 
             Console.ReadKey();
         }
-    }
 
-    public class Order
-    {
-        public int Id { get; set; }
-        public string ProductName { get; set; }
-        public int Quantity { get; set; }
-        public double Price { get; set; }
-
-    }
-
-    public class OrderPrinter
-    {
-        public void PrintOrderDetails(List<Order> orders)
+        public void ReadFile(string filePath)
         {
-            double totalPrice = 0;
 
-            foreach (var order in orders)
+            try
             {
-                if (order.Quantity > 0 && order.Price > 0)
-                {
-                    double total = order.Quantity * order.Price;
-                    Console.WriteLine("Order ID: " + order.Id);
-                    Console.WriteLine("Product: " + order.ProductName);
-                    Console.WriteLine("Quantity: " + order.Quantity);
-                    Console.WriteLine("Price: " + order.Price);
-                    Console.WriteLine("Total: " + order.Price * order.Quantity);
-                    Console.WriteLine("----------------------");
-
-                    totalPrice += order.Quantity * order.Price;
-                }
+                string content = File.ReadAllText(filePath);
+                Console.WriteLine(content);
+            }
+            catch(FileNotFoundException ex)
+            {
+                Console.WriteLine("File not found: " + ex.message);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                Console.WriteLine("Access denied: " + ex.message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Something went wrong" + ex.Message);
             }
 
-            Console.WriteLine("Total Price: " + totalPrice);
+            // File Not Found
+            // Unauthorized Access
+            // Any Other Exeption
         }
     }
-
-
 }
