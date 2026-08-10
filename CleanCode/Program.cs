@@ -6,7 +6,14 @@ namespace CleanCode
     {
         static void Main(string[] args)
         {
+            OrderProcessor orderProcessor = new OrderProcessor();
 
+            Order order = new Order();
+
+            if (orderProcessor.IsValid(order))
+            {
+                Console.WriteLine("Order is valid");
+            }
 
             Console.ReadKey();
         }
@@ -22,18 +29,18 @@ namespace CleanCode
                 }
             }
 
-            private bool IsValid(Order order)
-            {                 
+            public bool IsValid(Order order)
+            {
                 // TODO: Validate order logic
                 return false
             }
 
-            private void SaveOrder(Order order)
+            public void SaveOrder(Order order)
             {
                 // TODO: Save order logic
             }
 
-            private void NotifyCustomer(Order order)
+            public void NotifyCustomer(Order order)
             {
                 // TODO: Save customer logic
             }
