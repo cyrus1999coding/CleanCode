@@ -10,10 +10,22 @@ namespace CleanCode
             Console.ReadKey();
         }
 
-        class OrderProcessor
+        class CustomerService
         {
-            private bool hasError = false;
-            private bool isValid = true;
+            public void SetCustomerName()
+            { 
+            }
+
+            public bool HasErrors()
+            {
+                return false;
+            }
+
+            public bool CanReceiveEmails()
+            {
+                return false;
+            }
+
         }
 
     }
