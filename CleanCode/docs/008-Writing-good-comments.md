@@ -1,4 +1,7 @@
-﻿using System.Runtime.CompilerServices;
+﻿# 008 Writing good comments
+
+```cs
+using System.Runtime.CompilerServices;
 
 namespace CleanCode
 {
@@ -6,29 +9,26 @@ namespace CleanCode
     {
         static void Main(string[] args)
         {
-            MathUtils.BinarySearch();
+
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// **Because**👈 Improve the performance for large Datasets 
+        /// </summary>
+        /// <param name="sortedArray"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
         public class MathUtils
         {
-            
-            public static int CalculateFactorial(int number)
+            public int CalculateFactorial(int number)
             {
                 if (number <= 1)
                     return 1;
                 else
                     return number * CalculateFactorial(number - 1);
             }
-
-
-            /// <summary>
-            /// Improve the performance for large Datasets 
-            /// </summary>
-            /// <param name="sortedArray"></param>
-            /// <param name="target"></param>
-            /// <returns></returns>
-            public static int BinarySearch(int[] sortedArray, int target)
+            public int BinarySearch(int[] sortedArray, int target)
             {
                 int left = 0;
                 int right = sortedArray.Length - 1;
@@ -53,3 +53,7 @@ namespace CleanCode
 
     }
 }
+```
+
+Good comment :  
+🔑`Recursive Approach` esmplaining **why**
