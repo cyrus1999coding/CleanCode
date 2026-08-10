@@ -6,46 +6,20 @@ namespace CleanCode
     {
         static void Main(string[] args)
         {
-            MathUtils.BinarySearch();
+
             Console.ReadKey();
         }
 
         public class MathUtils
         {
-            
-            public static int CalculateFactorial(int number)
-            {
-                if (number <= 1)
-                    return 1;
-                else
-                    return number * CalculateFactorial(number - 1);
-            }
-
-
             /// <summary>
-            /// Improve the performance for large Datasets 
+            /// TODO: Implement the binary search algoritm
             /// </summary>
             /// <param name="sortedArray"></param>
             /// <param name="target"></param>
             /// <returns></returns>
             public static int BinarySearch(int[] sortedArray, int target)
             {
-                int left = 0;
-                int right = sortedArray.Length - 1;
-
-                while (left <= right)
-                {
-                    int middle = (left + right) / 2;
-
-                    if (sortedArray[middle] == target)
-                        return middle;
-                    else if (sortedArray[middle] < target)
-                        left = middle + 1;
-                    else
-                        right = middle - 1;
-
-
-                }
 
                 return -1;
             }
