@@ -4,23 +4,18 @@
     {
         static void Main(string[] args)
         {
-            
+
             Console.ReadKey();
         }
 
         class CustomerService
         {
-            public const int MAX_CUSTOMERS = 100; 
+            private string customerName = "JohnDoe";
+            //private string _customerName = "JohnDoe";
 
-            public int MyProperty { get; set; }
-
-            private string lastCustomerName = "John";
-
-            public string GetCustomerName(int customerId)
+            public CustomerService(string customerName)
             {
-                string customerName = "John Doe";
-
-                return "";
+                this.customerName = customerName;
             }
         }
 
