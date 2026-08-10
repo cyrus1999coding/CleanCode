@@ -1,4 +1,6 @@
-﻿using System.Runtime.CompilerServices;
+﻿using CleanCode.Models;
+using CleanCode.Services;
+using System.Runtime.CompilerServices;
 
 namespace CleanCode
 {
@@ -6,20 +8,12 @@ namespace CleanCode
     {
         static void Main(string[] args)
         {
+            CustomerService customerService = new CustomerService();
+            Customer customer = new Customer();
 
             Console.ReadKey();
         }
 
-        public class Customer
-        {
-            public int Id { get; set; }
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
 
-            public void PrintFullName()
-            {
-                Console.WriteLine($"{FirstName} {LastName}");
-            }
-        }
     }
 }

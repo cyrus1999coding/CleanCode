@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CleanCode
+namespace CleanCode.Services
 {
     internal class CustomerService
     {
