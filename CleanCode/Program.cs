@@ -6,51 +6,48 @@ namespace CleanCode
     {
         static void Main(string[] args)
         {
+            Invoice invoice = new Invoice { Amount = 100 };
+            BillingService billingService = new BillingService();
+            double total = billingService.CalculateTotal(invoice);
+            Console.WriteLine($"Total: {total}");
+
+            DiscountedInvoice discountedInvoice = new DiscountedInvoice { Amount= 100, Discount= 25};
+            DiscountedBillingService discountedBillingService = new DiscountedBillingService();
+            Console.WriteLine(discountedBillingService.CalculateTotal(discountedInvoice));
 
             Console.ReadKey();
         }
     }
 
-    public class Order
+    public class Invoice
     {
-        public int Id { get; set; }
-        public string ProductName { get; set; }
-        public int Quantity { get; set; }
-        public double Price { get; set; }
+        public double Amount { get; set; }
     }
 
-    public class OrderService
+    public class DiscountedInvoice : Invoice 
     {
-        private List<Order> orders = new List<Order>();
-        private OrderLogger orderLogger = new OrderLogger();
-        private OrderNotifier orderNotifier = new OrderNotifier();
+        public double Discount { get; set; }
+    }
 
-        public void AddOrder(Order order)
+    public class BillingService
+    {
+        public virtual double CalculateTotal(Invoice invoice)
         {
-            orders.Add(order);
-            orderLogger.LogOrder(order);
-            orderNotifier.NotifyCustomer(order);
+            // Base implementation for calculating total
+            return invoice.Amount;
         }
-
-
     }
 
-    public class OrderLogger
+    public class DiscountedBillingService : BillingService
     {
-        public void LogOrder(Order order)
+        public override double CalculateTotal(Invoice invoice)
         {
-            // Log the order to a File 
-            Console.WriteLine($"Order {order.Id} logged.");
-        }
+            if (invoice is DiscountedInvoice discountedInvoice)
+            {
+                return discountedInvoice.Amount - discountedInvoice.Discount;
+            }
 
-    }
-
-    public class OrderNotifier
-    {
-        public void NotifyCustomer(Order order)
-        {
-            // Send a notification to the customer
-            Console.WriteLine($"Customer notified for order {order.Id}.");
+            return base.CalculateTotal(invoice);
         }
     }
 
