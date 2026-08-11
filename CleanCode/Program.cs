@@ -6,45 +6,46 @@ namespace CleanCode
     {
         static void Main(string[] args)
         {
-            Worker human = new Worker();
-            human.Work();
-            human.Eat();
-
-            Robot robot = new Robot();
-            robot.Work();
+            IEmailService emailService = new MockEmailService();
+            Notification notification = new Notification(emailService);
+            notification.Send("Hello, This is a test notification.");
 
         }
+    }
 
-        public interface IWorkable
+    public interface IEmailService
+    {
+        public void SendEmail(string to, string subject, string body);
+    }
+
+    public class EmailService : IEmailService
+    {
+        public void SendEmail(string to, string subject, string body)
         {
-            void Work();
-
+            Console.WriteLine($"Sending email to {to}, with subject {subject}");
         }
-        public interface IEatable
+    }
+
+    public class Notification
+    {
+        private readonly IEmailService _emailService;
+
+        public Notification(IEmailService emailService)
         {
-            void Eat();
+            _emailService = emailService;
         }
 
-        public class Worker : IWorkable, IEatable
+        public void Send(string message)
         {
-            public void Work()
-            {
-                Console.WriteLine("Working");
-            }
-
-            public void Eat()
-            {
-                Console.WriteLine("Eating");
-            }
+            _emailService.SendEmail("user@example.com", "Notification", message);
         }
+    }
 
-        public class Robot : IWorkable
+    public class MockEmailService : IEmailService
+    {
+        public void SendEmail(string to, string subject, string body)
         {
-            public void Work()
-            {
-                Console.WriteLine("Working");
-            }
-
+            throw new NotImplementedException();
         }
     }
 
