@@ -6,44 +6,46 @@ namespace CleanCode
     {
         static void Main(string[] args)
         {
-            Bird sparrow = new Sparrow();
-            sparrow.MakeSound();
-            ((IFlyable)sparrow).Fly();
+            Worker human = new Worker();
+            human.Work();
+            human.Eat();
 
-            Bird penguin = new Penguin();
-            penguin.MakeSound();
+            Robot robot = new Robot();
+            robot.Work();
 
-            Console.ReadKey();
         }
-    }
 
-    public class Bird
-    {
-        public virtual void MakeSound()
+        public interface IWorkable
         {
-            Console.WriteLine("Chirp");
-        }
-    }
+            void Work();
 
-    public class Sparrow : Bird, IFlyable
-    {
-        public void Fly()
+        }
+        public interface IEatable
         {
-            Console.WriteLine("Flying");
+            void Eat();
         }
-    }
 
-    public class Penguin : Bird
-    {
-        public override void MakeSound()
+        public class Worker : IWorkable, IEatable
         {
-            base.MakeSound();
-        }
-    }
+            public void Work()
+            {
+                Console.WriteLine("Working");
+            }
 
-    public interface IFlyable
-    {
-        void Fly();
+            public void Eat()
+            {
+                Console.WriteLine("Eating");
+            }
+        }
+
+        public class Robot : IWorkable
+        {
+            public void Work()
+            {
+                Console.WriteLine("Working");
+            }
+
+        }
     }
 
 }
