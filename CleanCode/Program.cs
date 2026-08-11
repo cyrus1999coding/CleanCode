@@ -6,49 +6,44 @@ namespace CleanCode
     {
         static void Main(string[] args)
         {
-            Invoice invoice = new Invoice { Amount = 100 };
-            BillingService billingService = new BillingService();
-            double total = billingService.CalculateTotal(invoice);
-            Console.WriteLine($"Total: {total}");
+            Bird sparrow = new Sparrow();
+            sparrow.MakeSound();
+            ((IFlyable)sparrow).Fly();
 
-            DiscountedInvoice discountedInvoice = new DiscountedInvoice { Amount= 100, Discount= 25};
-            DiscountedBillingService discountedBillingService = new DiscountedBillingService();
-            Console.WriteLine(discountedBillingService.CalculateTotal(discountedInvoice));
+            Bird penguin = new Penguin();
+            penguin.MakeSound();
 
             Console.ReadKey();
         }
     }
 
-    public class Invoice
+    public class Bird
     {
-        public double Amount { get; set; }
-    }
-
-    public class DiscountedInvoice : Invoice 
-    {
-        public double Discount { get; set; }
-    }
-
-    public class BillingService
-    {
-        public virtual double CalculateTotal(Invoice invoice)
+        public virtual void MakeSound()
         {
-            // Base implementation for calculating total
-            return invoice.Amount;
+            Console.WriteLine("Chirp");
         }
     }
 
-    public class DiscountedBillingService : BillingService
+    public class Sparrow : Bird, IFlyable
     {
-        public override double CalculateTotal(Invoice invoice)
+        public void Fly()
         {
-            if (invoice is DiscountedInvoice discountedInvoice)
-            {
-                return discountedInvoice.Amount - discountedInvoice.Discount;
-            }
-
-            return base.CalculateTotal(invoice);
+            Console.WriteLine("Flying");
         }
+    }
+
+    public class Penguin : Bird
+    {
+        public override void MakeSound()
+        {
+            base.MakeSound();
+        }
+    }
+
+    public interface IFlyable
+    {
+        void Fly();
     }
 
 }
