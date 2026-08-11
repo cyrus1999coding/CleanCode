@@ -6,35 +6,52 @@ namespace CleanCode
     {
         static void Main(string[] args)
         {
-            
 
             Console.ReadKey();
         }
+    }
 
-        public void ReadFile(string filePath)
+    public class Order
+    {
+        public int Id { get; set; }
+        public string ProductName { get; set; }
+        public int Quantity { get; set; }
+        public double Price { get; set; }
+    }
+
+    public class OrderService
+    {
+        private List<Order> orders = new List<Order>();
+        private OrderLogger orderLogger = new OrderLogger();
+        private OrderNotifier orderNotifier = new OrderNotifier();
+
+        public void AddOrder(Order order)
         {
+            orders.Add(order);
+            orderLogger.LogOrder(order);
+            orderNotifier.NotifyCustomer(order);
+        }
 
-            try
-            {
-                string content = File.ReadAllText(filePath);
-                Console.WriteLine(content);
-            }
-            catch(FileNotFoundException ex)
-            {
-                Console.WriteLine("File not found: " + ex.message);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                Console.WriteLine("Access denied: " + ex.message);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Something went wrong" + ex.Message);
-            }
 
-            // File Not Found
-            // Unauthorized Access
-            // Any Other Exeption
+    }
+
+    public class OrderLogger
+    {
+        public void LogOrder(Order order)
+        {
+            // Log the order to a File 
+            Console.WriteLine($"Order {order.Id} logged.");
+        }
+
+    }
+
+    public class OrderNotifier
+    {
+        public void NotifyCustomer(Order order)
+        {
+            // Send a notification to the customer
+            Console.WriteLine($"Customer notified for order {order.Id}.");
         }
     }
+
 }
